@@ -114,7 +114,7 @@ public class payslip_generator extends JFrame implements ActionListener {
             Connection c1 = connect1.getConnection();
             System.out.println("Connection to SQLite has been established");
             Statement s1 = c1.createStatement();
-            ResultSet rs = s1.executeQuery("Select * from Accounts ");
+            ResultSet rs = s1.executeQuery("Select * from Employees ");
             while (rs.next()) {
                 int i = 0;
                 int id = rs.getInt("ID");
