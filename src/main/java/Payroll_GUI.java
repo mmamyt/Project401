@@ -14,13 +14,10 @@ public class Payroll_GUI extends JFrame {
 
     public Payroll_GUI()
     {
-        //setTitle("PayHero");
-        //Container cp = getContentPane();
         JPanel titlePanel = new JPanel();
         JPanel bodyPanel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(10,10,10,10);
-        //cp.setLayout(new BorderLayout());
         loginPage.setLayout(new BorderLayout());
         loginPage.setMinimumSize(new Dimension(700,450));
         loginPage.setLocationByPlatform(true);
@@ -68,7 +65,7 @@ public class Payroll_GUI extends JFrame {
     {
         public void actionPerformed(ActionEvent evt)
         {
-            if(usernameText.getText().contains(username) && passwordText.getText().contains(password))
+            if(usernameText.getText().equals(username) && passwordText.getText().equals(password))
             {
                 loginPage.dispose();
                 new HomePageGUI();
@@ -87,9 +84,6 @@ class HomePageGUI extends JFrame{
 
     public HomePageGUI()
     {
-        //setTitle("Home Page");
-        //Container cp = getContentPane();
-        //cp.setLayout(new BorderLayout());
         homePage.setLayout(new BorderLayout());
         JPanel centerPanel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -97,6 +91,7 @@ class HomePageGUI extends JFrame{
         homePage.setMinimumSize(new Dimension(700,450));
         homePage.setLocationByPlatform(true);
         homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        homepage.pack();
 
         sEIDText.setEditable(true);
         c.gridx = 0;
@@ -115,12 +110,15 @@ class HomePageGUI extends JFrame{
         centerPanel.add(calcSalBTN, c);
 
         ActionListener2 aListen2 = new ActionListener2();
+        FocusListener1 aFocus1 = new FocusListener1();
         searchBTN.addActionListener(aListen2);
         newEmpBTN.addActionListener(aListen2);
         calcSalBTN.addActionListener(aListen2);
+        sEIDText.addFocusListener(aFocus1);
 
         homePage.add(centerPanel, BorderLayout.CENTER);
         homePage.setVisible(true);
+        searchBTN.requestFocusInWindow();
     }
 
     class ActionListener2 implements ActionListener
@@ -146,6 +144,19 @@ class HomePageGUI extends JFrame{
             }
 
         }
+    }
+    
+    class FocusListener1 implements FocusListener
+    {
+    	public void focusGained(FocusEvent evt)
+    	{
+    		sEIDText.setText("");
+    	}
+    	
+    	public void focusLost(FocusEvent evt)
+    	{
+    		sEIDText.setText("ENTER EMPLOYEE ID");
+    	}
     }
 
     public static void main(String[] args) {
