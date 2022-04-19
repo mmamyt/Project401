@@ -83,6 +83,7 @@ class HomePageGUI extends JFrame{
     private JTextField sEIDText = new JTextField(15);
     private JButton searchBTN = new JButton("Search");
     private JButton newEmpBTN = new JButton("New Employee Record");
+    private JButton calcSalBTN = new JButton("Payslip Generator");
 
     public HomePageGUI()
     {
@@ -109,10 +110,14 @@ class HomePageGUI extends JFrame{
         c.gridy = 1;
         centerPanel.add(newEmpBTN, c);
 
+        c.gridx = 1;
+        c.gridy = 1;
+        centerPanel.add(calcSalBTN, c);
 
         ActionListener2 aListen2 = new ActionListener2();
         searchBTN.addActionListener(aListen2);
         newEmpBTN.addActionListener(aListen2);
+        calcSalBTN.addActionListener(aListen2);
 
         homePage.add(centerPanel, BorderLayout.CENTER);
         homePage.setVisible(true);
@@ -132,6 +137,12 @@ class HomePageGUI extends JFrame{
             {
                 homePage.dispose();
                 PageThree pt = new PageThree();
+            }
+
+            if(evt.getSource() == calcSalBTN)
+            {
+                homePage.dispose();
+                payslip_generator pg = new payslip_generator();
             }
 
         }
