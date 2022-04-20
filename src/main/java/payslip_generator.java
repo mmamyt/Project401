@@ -92,6 +92,12 @@ public class payslip_generator extends JFrame implements ActionListener {
         generateBTN = new JButton("Generate Payslip for all");
         generateBTN.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                  	try {
+							writepayslip(getemployeeinfo());
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
             }});
         bodyPanel.add(generateBTN, c);
         c.gridx = 1;
@@ -107,7 +113,7 @@ public class payslip_generator extends JFrame implements ActionListener {
         // TODO Auto-generated method stub
 
     }
-    public void getemployeeinfo(){
+    public payroll_data[] getemployeeinfo(){
         payslip_generator connect1=new payslip_generator();
         payslipdata = new payroll_data[100];
         try {
@@ -115,8 +121,8 @@ public class payslip_generator extends JFrame implements ActionListener {
             System.out.println("Connection to SQLite has been established");
             Statement s1 = c1.createStatement();
             ResultSet rs = s1.executeQuery("Select * from Employees ");
+            int i = 0;
             while (rs.next()) {
-                int i = 0;
                 int id = rs.getInt("ID");
                 String f_name = rs.getString("First_Name");
                 String l_name = rs.getString("Last_Name");
@@ -152,7 +158,7 @@ public class payslip_generator extends JFrame implements ActionListener {
         }catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
+        return payslipdata;
 
     }
     private Connection getConnection() throws SQLException {
@@ -169,54 +175,56 @@ public class payslip_generator extends JFrame implements ActionListener {
         long noOfWeeksBetween = ChronoUnit.WEEKS.between(dateBefore, dateAfter);
         return noOfWeeksBetween;
     }
-    void Writepayslip(payroll_data[] param) throws IOException {
-        int i = 0;
-        do {
-            Path currentRelativePath = Paths.get("");
-            String s = currentRelativePath.toAbsolutePath().toString();
-            System.out.println("Current relative path is: " + s);
-            String dirString=s+"/data";
-            Path dirPath=Paths.get(dirString);
-            if (Files.notExists(dirPath)){
-                Files.createDirectories(dirPath);
-            }
-
-            String fileString= param[i].l_name + param[i].f_name + "Payslip.txt";
-            Path filePath=Paths.get(dirString,fileString);
-            if (Files.notExists(filePath)){
-                Files.createFile(filePath);
-            }
-            if (Files.exists(dirPath)&&Files.isDirectory(dirPath)){
-                System.out.println("Directory: "
-                        +dirPath.toAbsolutePath());
-                System.out.println("Files: ");
-                DirectoryStream<Path> dirStream=
-                        Files.newDirectoryStream(dirPath);
-                for (Path p:dirStream){
-                    System.out.println("    "+p.getFileName());
-                }
-            }
-            Path payslipPath=Paths.get(dirString, fileString);
-            File payslipFile=payslipPath.toFile();
-            System.out.println(payslipFile);
-            PrintWriter accwriter=new PrintWriter(
-                    new BufferedWriter(
-                            new FileWriter(payslipFile)));
-            accwriter.println("");
-            accwriter.println("Company: Disney Gold Mining and Co");
-            accwriter.println("12345 Mainstreet, Chicago IL");
-            accwriter.println("");
-            accwriter.println("Payslip for: " + param[i].f_name + " " + param[i].l_name);
-            accwriter.println("Role: " + param[i].role);
-            accwriter.println("Address: " + param[i].address);
-            accwriter.println("");
-            accwriter.println("Pay Period for the following dates: " + payperiod);
-            accwriter.println("Pay Type: BiWeekly");
-            accwriter.println("Salary to be paid: " + param[i].sal * (Num_weeks/2) + "Gold Nuggets");
-            accwriter.println("");
-            accwriter.close();
-            i++;
-        }
-        while (param[i] != null);
-    }
+    void writepayslip(payroll_data[] param) throws IOException {
+		for(int i = 0; i < param.length; i++) {
+		if (param[i] != null) {
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		System.out.println("Current relative path is: " + s);
+		String dirString=s+"/data";
+		Path dirPath=Paths.get(dirString);
+		if (Files.notExists(dirPath)){
+		Files.createDirectories(dirPath);
+		}
+		
+		String fileString= param[i].l_name + param[i].f_name + "Payslip.txt";
+		Path filePath=Paths.get(dirString,fileString);
+		if (Files.notExists(filePath)){
+			Files.createFile(filePath);
+		}
+		if (Files.exists(dirPath)&&Files.isDirectory(dirPath)){
+			System.out.println("Directory: "
+					+dirPath.toAbsolutePath());
+			System.out.println("Files: ");
+			DirectoryStream<Path> dirStream=
+					Files.newDirectoryStream(dirPath);
+			for (Path p:dirStream){
+				System.out.println("    "+p.getFileName());
+			}
+		}
+		Path payslipPath=Paths.get(dirString, fileString);
+		File payslipFile=payslipPath.toFile();
+		System.out.println(payslipFile);
+		PrintWriter accwriter=new PrintWriter(
+				new BufferedWriter(
+				new FileWriter(payslipFile)));
+		accwriter.println("");
+		accwriter.println("Company: Disney Gold Mining and Co");
+		accwriter.println("12345 Mainstreet, Chicago IL");
+		accwriter.println("");
+		accwriter.println("Payslip for: " + param[i].f_name + " " + param[i].l_name);
+		accwriter.println("Role: " + param[i].role);
+		accwriter.println("Address: " + param[i].address);
+		accwriter.println("");
+		accwriter.println("Pay Period for the following dates: " + payperiod);
+		accwriter.println("Pay Type: BiWeekly");
+		accwriter.println("Salary to be paid: " + param[i].sal * (Num_weeks/2) + "Gold Nuggets");
+		accwriter.println("");
+	accwriter.close();
+		}
+		else {
+			break;
+		}
+	}
+}
 }
