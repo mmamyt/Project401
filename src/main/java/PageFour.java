@@ -26,6 +26,7 @@ public class PageFour extends javax.swing.JFrame{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
         panel.setLayout(null);
+        frame.setLocationByPlatform(true);
 
         //ID
         labelID = new JLabel("ID:");
@@ -140,10 +141,10 @@ public class PageFour extends javax.swing.JFrame{
                     String text = "                  PAYSLIP \n" +
                             ""+
                             "\nPay Date:       "+ now() +
-                            "\n Pay Period:    "+ now().minusMonths(1).with(TemporalAdjusters.firstDayOfMonth())+ " - " + now().minusMonths(1).with(TemporalAdjusters.lastDayOfMonth()) + "\n"+
+                            "\nPay Period:    "+ now().minusMonths(1).with(TemporalAdjusters.firstDayOfMonth())+ " - " + now().minusMonths(1).with(TemporalAdjusters.lastDayOfMonth()) + "\n"+
                             "\nFull Name:      "+ firstName.getText() + " " + lastName.getText() +
-                            "\n Address:       " + Address.getText() +
-                            "\n Salary:        LTC " + salary.getText();
+                            "\nAddress:        " + Address.getText() +
+                            "\nSalary:          LTC " + salary.getText();
                     Paragraph par = new Paragraph(text);
                     PdfWriter pdfWriter = new PdfWriter(path);
                     PdfDocument pdfDoc = new PdfDocument(pdfWriter);
@@ -168,6 +169,5 @@ public class PageFour extends javax.swing.JFrame{
 
     public static void main(String[] args) throws FileNotFoundException {
         PageFour pf = new PageFour();
-
     }
 }

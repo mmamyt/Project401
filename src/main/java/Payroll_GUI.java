@@ -91,7 +91,7 @@ class HomePageGUI extends JFrame{
         homePage.setMinimumSize(new Dimension(700,450));
         homePage.setLocationByPlatform(true);
         homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        homepage.pack();
+        //homepage.pack();
 
         sEIDText.setEditable(true);
         c.gridx = 0;

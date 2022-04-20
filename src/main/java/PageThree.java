@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -7,7 +8,7 @@ public class PageThree extends javax.swing.JFrame {
 
     public JFrame frame;
     public JPanel panel;
-    public JLabel labelID, labelFN, labelLN, labelRole, labelSDate, labelSalary, labelDepartment, labelAddress, labelEmail, success;
+    public JLabel labelID, labelFN, labelLN, labelRole, labelSDate, labelSalary, labelDepartment, labelAddress, labelEmail, msgUpdated, msgGenerated;
     public JTextField ID, firstName, lastName, role, startDate, salary, department, Address, email;
     public javax.swing.JButton buttonAdd;
 
@@ -21,6 +22,7 @@ public class PageThree extends javax.swing.JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
         panel.setLayout(null);
+        frame.setLocationByPlatform(true);
 
         //ID
         labelID = new JLabel("ID:");
@@ -95,8 +97,10 @@ public class PageThree extends javax.swing.JFrame {
         panel.add(email);
 
         //success message
-        success = new JLabel(" ");
-        success.setBounds(300,220,150,25);
+        msgUpdated = new JLabel(" ");
+        msgUpdated.setBounds(380,250,200,25);
+        panel.add(msgUpdated);
+
         frame.setVisible(true);
 
         //button
@@ -125,12 +129,22 @@ public class PageThree extends javax.swing.JFrame {
                         department.setText("");
                         Address.setText("");
                         email.setText("");
-                        success.setText("New Employee details were added");
+                        msgUpdated.setText("New Employee details were added");
                     } catch (SQLException e) {
-                        System.out.println(e.getMessage());
+                        msgUpdated.setText("Please fill required fields");
                     }
-                }else {
-                    System.out.println("Please enter all fields");
+                }else if(ID.getText().isEmpty() || firstName.getText().isEmpty() || lastName.getText().isEmpty() || role.getText().isEmpty() || startDate.getText().isEmpty() ||
+                        salary.getText().isEmpty() || department.getText().isEmpty() || Address.getText().isEmpty() || email.getText().isEmpty()) {
+                    if(ID.getText().isEmpty()) {ID.setText("ID is mandatory\n"); ID.setBackground(Color.pink);}
+                    if(firstName.getText().isEmpty()) {firstName.setText("First Name is mandatory\n"); firstName.setBackground(Color.pink);}
+                    if(lastName.getText().isEmpty()) {lastName.setText("Last Name is mandatory\n"); lastName.setBackground(Color.pink);}
+                    if(role.getText().isEmpty()) {role.setText("Role is mandatory\n"); role.setBackground(Color.pink);}
+                    if(startDate.getText().isEmpty()) {startDate.setText("Start Date is mandatory\n"); startDate.setBackground(Color.pink);}
+                    if(salary.getText().isEmpty()) {salary.setText("Salary is mandatory\n"); salary.setBackground(Color.pink);}
+                    if(department.getText().isEmpty()) {department.setText("Department is mandatory\n"); department.setBackground(Color.pink);}
+                    if(Address.getText().isEmpty()) {Address.setText("Address is mandatory\n"); Address.setBackground(Color.pink);}
+                    if(email.getText().isEmpty()) {email.setText("email is mandatory\n"); email.setBackground(Color.pink);}
+                    msgUpdated.setText("Please fill required fields");
                 }
             }
         });
