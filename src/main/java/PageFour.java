@@ -15,7 +15,7 @@ import static java.time.LocalDate.now;
 public class PageFour extends javax.swing.JFrame{
     public JFrame frame;
     public JPanel panel;
-    public JLabel labelID, labelFN, labelLN, labelRole, labelSDate, labelEDate, labelSalary, labelDepartment, labelAddress, labelEmail;
+    public JLabel labelID, labelFN, labelLN, labelRole, labelSDate, labelEDate, labelSalary, labelDepartment, labelAddress, labelEmail, msgGenerated, msgUpdated;
     public JTextField ID, firstName, lastName, role, startDate, endDate, salary, department, Address, email;
     public javax.swing.JButton buttonUpdate, buttonGenerate;
 
@@ -107,6 +107,16 @@ public class PageFour extends javax.swing.JFrame{
         email = new JTextField();
         email.setBounds(380, 160, 150, 25);
         panel.add(email);
+
+        //Record is updated message
+        msgUpdated = new JLabel(" ");
+        msgUpdated.setBounds(380,250,200,25);
+        panel.add(msgUpdated);
+
+        //Payslip is created message
+        msgGenerated = new JLabel(" ");
+        msgGenerated.setBounds(380,250,200,25);
+        panel.add(msgGenerated);
 
         //button
         buttonUpdate = new JButton("Update Record");

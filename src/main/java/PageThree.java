@@ -8,7 +8,7 @@ public class PageThree extends javax.swing.JFrame {
 
     public JFrame frame;
     public JPanel panel;
-    public JLabel labelID, labelFN, labelLN, labelRole, labelSDate, labelSalary, labelDepartment, labelAddress, labelEmail, msgUpdated, msgGenerated;
+    public JLabel labelID, labelFN, labelLN, labelRole, labelSDate, labelSalary, labelDepartment, labelAddress, labelEmail, msgUpdated;
     public JTextField ID, firstName, lastName, role, startDate, salary, department, Address, email;
     public javax.swing.JButton buttonAdd;
 
@@ -131,7 +131,7 @@ public class PageThree extends javax.swing.JFrame {
                         email.setText("");
                         msgUpdated.setText("New Employee details were added");
                     } catch (SQLException e) {
-                        msgUpdated.setText("Please fill required fields");
+                        msgUpdated.setText("Please fill all required fields");
                     }
                 }else if(ID.getText().isEmpty() || firstName.getText().isEmpty() || lastName.getText().isEmpty() || role.getText().isEmpty() || startDate.getText().isEmpty() ||
                         salary.getText().isEmpty() || department.getText().isEmpty() || Address.getText().isEmpty() || email.getText().isEmpty()) {
@@ -144,7 +144,7 @@ public class PageThree extends javax.swing.JFrame {
                     if(department.getText().isEmpty()) {department.setText("Department is mandatory\n"); department.setBackground(Color.pink);}
                     if(Address.getText().isEmpty()) {Address.setText("Address is mandatory\n"); Address.setBackground(Color.pink);}
                     if(email.getText().isEmpty()) {email.setText("email is mandatory\n"); email.setBackground(Color.pink);}
-                    msgUpdated.setText("Please fill required fields");
+                    msgUpdated.setText("Please fill all required fields");
                 }
             }
         });
