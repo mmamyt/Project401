@@ -21,7 +21,7 @@ import javax.swing.*;
 
 
 class payroll_data {
-    int id;
+    String id;
     String f_name;
     String l_name;
     String role;
@@ -123,7 +123,7 @@ public class payslip_generator extends JFrame implements ActionListener {
             ResultSet rs = s1.executeQuery("Select * from Employees ");
             int i = 0;
             while (rs.next()) {
-                int id = rs.getInt("ID");
+                String id = rs.getString("ID");
                 String f_name = rs.getString("First_Name");
                 String l_name = rs.getString("Last_Name");
                 String role = rs.getString("Role");
