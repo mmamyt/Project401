@@ -81,6 +81,7 @@ class HomePageGUI extends JFrame{
     private JButton searchBTN = new JButton("Search");
     private JButton newEmpBTN = new JButton("New Employee Record");
     private JButton calcSalBTN = new JButton("Payslip Generator");
+    private JButton browseBTN = new JButton("Browse");
 
     public HomePageGUI()
     {
@@ -105,6 +106,9 @@ class HomePageGUI extends JFrame{
         c.gridy = 1;
         centerPanel.add(newEmpBTN, c);
 
+        c.gridx = 2;
+        centerPanel.add(browseBTN);
+
         c.gridx = 1;
         c.gridy = 1;
         centerPanel.add(calcSalBTN, c);
@@ -114,6 +118,7 @@ class HomePageGUI extends JFrame{
         searchBTN.addActionListener(aListen2);
         newEmpBTN.addActionListener(aListen2);
         calcSalBTN.addActionListener(aListen2);
+        browseBTN.addActionListener(aListen2);
         sEIDText.addFocusListener(aFocus1);
 
         homePage.add(centerPanel, BorderLayout.CENTER);
@@ -135,6 +140,12 @@ class HomePageGUI extends JFrame{
             {
                 homePage.dispose();
                 PageThree pt = new PageThree();
+            }
+
+            if(evt.getSource() == browseBTN)
+            {
+                homePage.dispose();
+                BrowseDB br = new BrowseDB();
             }
 
             if(evt.getSource() == calcSalBTN)
