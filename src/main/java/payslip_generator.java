@@ -231,7 +231,7 @@ public class payslip_generator extends JFrame implements ActionListener {
 		accwriter.println("Address: " + param[i].address);
 		accwriter.println("");
 		accwriter.println("Pay Type: BiWeekly");
-		accwriter.println("Salary to be paid: " + param[i].sal * (Num_weeks/2) + "Gold Nuggets");
+		accwriter.println("Salary to be paid: " + param[i].sal * (Num_weeks/2) + " Gold Nuggets");
 		accwriter.println("");
 	accwriter.close();
 		}

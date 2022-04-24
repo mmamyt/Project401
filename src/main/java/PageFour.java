@@ -123,13 +123,8 @@ public class PageFour extends javax.swing.JFrame{
 
         //Record is updated message
         msgUpdated = new JLabel(" ");
-        msgUpdated.setBounds(380,250,200,25);
+        msgUpdated.setBounds(250,220,200,25);
         panel.add(msgUpdated);
-
-        //Payslip is created message
-        msgGenerated = new JLabel(" ");
-        msgGenerated.setBounds(380,250,200,25);
-        panel.add(msgGenerated);
 
         //button
         buttonUpdate = new JButton("Update Record");
@@ -146,11 +141,17 @@ public class PageFour extends javax.swing.JFrame{
                     Connection c4 = getConnection();
                     Statement s4 = c4.createStatement();
                     int rowCount = s4.executeUpdate(query);
+                    msgUpdated.setText("Record is Updated");
                 }catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }
             }
         });
+
+        //Payslip is created message
+        msgGenerated = new JLabel(" ");
+        msgGenerated.setBounds(250,250,200,25);
+        panel.add(msgGenerated);
 
         //button to generate Payslip
         buttonGenerate = new JButton("Create Payslip");
@@ -162,12 +163,14 @@ public class PageFour extends javax.swing.JFrame{
                 try{
                     String path = "C:\\Users\\mmamyt2\\Desktop\\"+firstName.getText()+".pdf";
                     String text = "                  PAYSLIP \n" +
-                            ""+
-                            "\nPay Date:       "+ now() +
-                            "\nPay Period:    "+ now().minusMonths(1).with(TemporalAdjusters.firstDayOfMonth())+ " - " + now().minusMonths(1).with(TemporalAdjusters.lastDayOfMonth()) + "\n"+
-                            "\nFull Name:      "+ firstName.getText() + " " + lastName.getText() +
-                            "\nAddress:        " + Address.getText() +
-                            "\nSalary:          LTC " + salary.getText();
+                            "\n"+
+                            "\nCompany: Disney Gold Mining and Co" +
+                            "\n12345 Mainstreet, Chicago IL" +
+                            "\nPay Date: "+ now() +
+                            "\nPay Period: "+ now().minusMonths(1).with(TemporalAdjusters.firstDayOfMonth())+ " - " + now().minusMonths(1).with(TemporalAdjusters.lastDayOfMonth()) + "\n"+
+                            "\nFull Name: "+ firstName.getText() + " " + lastName.getText() +
+                            "\nAddress: " + Address.getText() +
+                            "\nSalary: " + salary.getText() + " Gold Nuggets";
                     Paragraph par = new Paragraph(text);
                     PdfWriter pdfWriter = new PdfWriter(path);
                     PdfDocument pdfDoc = new PdfDocument(pdfWriter);
@@ -175,6 +178,7 @@ public class PageFour extends javax.swing.JFrame{
                     Document document = new Document(pdfDoc);
                     document.add(par);
                     document.close();
+                    msgGenerated.setText("Payslip is Created");
                 } catch (Exception e){
                     System.out.println(e.getMessage());
                 }
