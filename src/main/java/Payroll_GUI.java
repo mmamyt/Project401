@@ -1,5 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.io.*;
 import javax.swing.*;
 
 public class Payroll_GUI extends JFrame {
@@ -8,12 +14,28 @@ public class Payroll_GUI extends JFrame {
     private String username = "Admin";
     private String password = "Admin123";
     private JTextField usernameText = new JTextField(20);
-    private JTextField passwordText = new JTextField(20);
+    private JPasswordField passwordText = new JPasswordField(20);
     private JButton loginBTN = new JButton("Login");
     HomePageGUI hpgui;
+    
+    //I moved the public static in this class because my computer couldn't run this program when this was in the other class.
+    public static void main(String[] args) {
+        new Payroll_GUI();
+    }
 
     public Payroll_GUI()
     {
+    	//This try and catch block is for the custom font.
+    	try
+    	{
+    		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    		ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Dark_Future.ttf")));
+    	}
+    	catch(IOException|FontFormatException e)
+    	{
+    		e.printStackTrace();
+    	}
+    	
         JPanel titlePanel = new JPanel();
         JPanel bodyPanel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -82,6 +104,7 @@ class HomePageGUI extends JFrame{
     private JButton newEmpBTN = new JButton("New Employee Record");
     private JButton calcSalBTN = new JButton("Payslip Generator");
     private JButton browseBTN = new JButton("Browse");
+    PageFour p4;
 
     public HomePageGUI()
     {
@@ -92,8 +115,9 @@ class HomePageGUI extends JFrame{
         homePage.setMinimumSize(new Dimension(700,450));
         homePage.setLocationByPlatform(true);
         homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //homepage.pack();
-
+        homePage.pack();
+        
+        sEIDText.setText("ENTER EMPLOYEE ID");
         sEIDText.setEditable(true);
         c.gridx = 0;
         c.gridy = 0;
@@ -128,12 +152,47 @@ class HomePageGUI extends JFrame{
 
     class ActionListener2 implements ActionListener
     {
+    	SQLConnection connect = new SQLConnection();
         public void actionPerformed(ActionEvent evt)
         {
             if(evt.getSource() == searchBTN)
             {
-                homePage.dispose();
-                PageFour pf = new PageFour();
+            	try
+				{
+					String query = "SELECT * FROM Employees "+
+								   "WHERE ID=?";
+					Connection c = connect.getConnection();
+					PreparedStatement ps = c.prepareStatement(query);
+					ps.setString(1, sEIDText.getText());
+					ResultSet rs = ps.executeQuery();
+					while(rs.next())
+					{
+						p4.dBID = rs.getString("ID");
+						p4.dBFirstName = rs.getString("First_Name");
+						p4.dBLastName = rs.getString("Last_Name");
+						p4.dBRole = rs.getString("Role");
+						p4.dBSalary = rs.getDouble("Salary");
+						p4.dBStartDate = rs.getString("StartDate");
+						p4.dBEndDate = rs.getString("EndDate");
+						p4.dBDepartment = rs.getString("Department");
+						p4.dBAddress = rs.getString("Address");
+						p4.dBEmail = rs.getString("email");
+					}
+				}
+				catch(SQLException e)
+				{
+					System.out.println(e.getMessage());
+				}
+				
+				if(p4.dBID != null)
+				{
+					homePage.dispose();
+					new PageFour();
+				}
+				else
+				{
+					sEIDText.setText("ID Not Found");
+				}
             }
 
             if(evt.getSource() == newEmpBTN)
@@ -166,11 +225,16 @@ class HomePageGUI extends JFrame{
     	
     	public void focusLost(FocusEvent evt)
     	{
-    		sEIDText.setText("ENTER EMPLOYEE ID");
     	}
     }
+}
 
-    public static void main(String[] args) {
-        new Payroll_GUI();
-    }
+class SQLConnection
+{
+	protected Connection getConnection() throws SQLException
+	{
+		String dbUrl = "jdbc:sqlite:C:\\SQLiteStudio\\PayrollSystem";
+		Connection connection = DriverManager.getConnection(dbUrl);
+		return connection;
+	}
 }

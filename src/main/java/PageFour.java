@@ -17,7 +17,10 @@ public class PageFour extends javax.swing.JFrame{
     public JPanel panel;
     public JLabel labelID, labelFN, labelLN, labelRole, labelSDate, labelEDate, labelSalary, labelDepartment, labelAddress, labelEmail, msgGenerated, msgUpdated;
     public JTextField ID, firstName, lastName, role, startDate, endDate, salary, department, Address, email;
+    static String dBID, dBFirstName, dBLastName, dBRole, dBStartDate, dBEndDate, dBDepartment, dBAddress, dBEmail;
+    static double dBSalary;
     public javax.swing.JButton buttonUpdate, buttonGenerate;
+    HomePageGUI hpgui;
 
     public PageFour(){
         frame = new JFrame();
@@ -34,6 +37,7 @@ public class PageFour extends javax.swing.JFrame{
         panel.add(labelID);
         ID = new JTextField();
         ID.setBounds(100, 40, 150, 25);
+        ID.setText(dBID);
         panel.add(ID);
 
         //First Name
@@ -42,6 +46,7 @@ public class PageFour extends javax.swing.JFrame{
         panel.add(labelFN);
         firstName = new JTextField();
         firstName.setBounds(100, 70, 150, 25);
+        firstName.setText(dBFirstName);
         panel.add(firstName);
 
         //Last Name
@@ -50,6 +55,7 @@ public class PageFour extends javax.swing.JFrame{
         panel.add(labelLN);
         lastName = new JTextField();
         lastName.setBounds(100, 100, 150, 25);
+        lastName.setText(dBLastName);
         panel.add(lastName);
 
         //Address
@@ -58,6 +64,7 @@ public class PageFour extends javax.swing.JFrame{
         panel.add(labelAddress);
         Address = new JTextField();
         Address.setBounds(100, 130, 150, 25);
+        Address.setText(dBAddress);
         panel.add(Address);
 
         //Start date
@@ -66,6 +73,7 @@ public class PageFour extends javax.swing.JFrame{
         panel.add(labelSDate);
         startDate = new JTextField();
         startDate.setBounds(100, 160, 150, 25);
+        startDate.setText(dBStartDate);
         panel.add(startDate);
 
         //End Date
@@ -74,6 +82,7 @@ public class PageFour extends javax.swing.JFrame{
         panel.add(labelEDate);
         endDate = new JTextField();
         endDate.setBounds(380, 40, 150, 25);
+        endDate.setText(dBEndDate);
         panel.add(endDate);
 
         //Role
@@ -82,6 +91,7 @@ public class PageFour extends javax.swing.JFrame{
         panel.add(labelRole);
         role = new JTextField();
         role.setBounds(380, 70, 150, 25);
+        role.setText(dBRole);
         panel.add(role);
 
         //Department
@@ -90,6 +100,7 @@ public class PageFour extends javax.swing.JFrame{
         panel.add(labelDepartment);
         department = new JTextField();
         department.setBounds(380, 100, 150, 25);
+        department.setText(dBDepartment);
         panel.add(department);
 
         //Salary
@@ -98,6 +109,7 @@ public class PageFour extends javax.swing.JFrame{
         panel.add(labelSalary);
         salary = new JTextField();
         salary.setBounds(380, 130, 150, 25);
+        salary.setText(dBSalary + "");
         panel.add(salary);
 
         //email
@@ -106,6 +118,7 @@ public class PageFour extends javax.swing.JFrame{
         panel.add(labelEmail);
         email = new JTextField();
         email.setBounds(380, 160, 150, 25);
+        email.setText(dBEmail);
         panel.add(email);
 
         //Record is updated message
