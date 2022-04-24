@@ -1,4 +1,4 @@
-package payslip_generator;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedWriter;
