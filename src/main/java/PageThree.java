@@ -9,7 +9,7 @@ import java.sql.*;
 public class PageThree extends javax.swing.JFrame {
 
     public JFrame frame;
-    public JPanel panel, titlePanel;
+    public JPanel panel;
     public JLabel labelID, labelFN, labelLN, labelRole, labelSDate, labelSalary, labelDepartment, labelAddress, labelEmail, msgUpdated, payHeroTitle;
     public JTextField ID, firstName, lastName, role, startDate, salary, department, Address, email;
     public javax.swing.JButton buttonAdd;
@@ -76,10 +76,10 @@ public class PageThree extends javax.swing.JFrame {
 
         //Start date
         labelSDate = new JLabel("Start Date:");
-        labelSDate.setBounds(20, 210, 100, 25);
+        labelSDate.setBounds(20, 220, 100, 25);
         panel.add(labelSDate);
         startDate = new JTextField();
-        startDate.setBounds(100, 210, 150, 25);
+        startDate.setBounds(100, 220, 150, 25);
         panel.add(startDate);
 
         //Role
@@ -108,10 +108,10 @@ public class PageThree extends javax.swing.JFrame {
 
         //email
         labelEmail = new JLabel("email:");
-        labelEmail.setBounds(300, 210, 100, 25);
+        labelEmail.setBounds(300, 220, 100, 25);
         panel.add(labelEmail);
         email = new JTextField();
-        email.setBounds(380, 210, 150, 25);
+        email.setBounds(380, 220, 150, 25);
         panel.add(email);
 
         //success message

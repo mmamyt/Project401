@@ -106,6 +106,9 @@ class HomePageGUI extends JFrame{
     private JButton browseBTN = new JButton("Browse");
     PageFour p4;
 
+    public static void main(String[] args) {
+        HomePageGUI hm = new HomePageGUI();
+    }
     public HomePageGUI()
     {
         homePage.setLayout(new BorderLayout());
@@ -137,6 +140,23 @@ class HomePageGUI extends JFrame{
         c.gridy = 1;
         centerPanel.add(calcSalBTN, c);
 
+        //title
+        JPanel titlePanel = new JPanel();
+        JLabel payHeroTitle = new JLabel("PayHero");
+        payHeroTitle.setFont(new Font("Dark Future", Font.BOLD, 34));
+        payHeroTitle.setBounds(230,30, 200, 40);
+        titlePanel.add(payHeroTitle, BorderLayout.NORTH);
+
+        try
+        {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Dark_Future.ttf")));
+        }
+        catch(IOException |FontFormatException e)
+        {
+            e.printStackTrace();
+        }
+
         ActionListener2 aListen2 = new ActionListener2();
         FocusListener1 aFocus1 = new FocusListener1();
         searchBTN.addActionListener(aListen2);
@@ -146,6 +166,7 @@ class HomePageGUI extends JFrame{
         sEIDText.addFocusListener(aFocus1);
 
         homePage.add(centerPanel, BorderLayout.CENTER);
+        homePage.add(titlePanel, BorderLayout.NORTH);
         homePage.setVisible(true);
         searchBTN.requestFocusInWindow();
     }

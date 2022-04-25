@@ -2,11 +2,11 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,18 +25,33 @@ public class BrowseDB extends JFrame {
 
     public BrowseDB() {
         setPreferredSize(new Dimension(700,500));
-        setMaximumSize(new Dimension(500,500));
-        setMinimumSize(new Dimension(500,500));
         setResizable(false);
         setTitle("Browse Employee Data");
         pack();
         setLocationByPlatform(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container cp = getContentPane();
+
+        //adding title
+        JLabel payHeroTitle = new JLabel("                           PayHero");
+        payHeroTitle.setFont(new Font("Dark Future", Font.BOLD, 34));
+        payHeroTitle.setBounds(230,30, 200, 40);
+        cp.add(payHeroTitle, BorderLayout.CENTER);
+        cp.add(payHeroTitle, BorderLayout.NORTH);
+        try
+        {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Dark_Future.ttf")));
+        }
+        catch(IOException |FontFormatException e)
+        {
+            e.printStackTrace();
+        }
+
         DefaultTableModel model=new DefaultTableModel();
         table = new JTable(model);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        table.setPreferredScrollableViewportSize(new Dimension(300, 100));
+        table.setPreferredScrollableViewportSize(new Dimension(300, 300));
         table.setFillsViewportHeight(true);
         cp.add(new JScrollPane(table));
         model.addColumn("ID");
@@ -49,7 +64,7 @@ public class BrowseDB extends JFrame {
         model.addColumn("Role");
         model.addColumn("Department");
         model.addColumn("Email");
-        cp.setLayout(new GridLayout(4,2));
+        cp.setLayout(new GridLayout(3, 1));
         setVisible(true);
         try {
             Connection c = getConnection();

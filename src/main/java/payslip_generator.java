@@ -52,6 +52,17 @@ public class payslip_generator extends JFrame implements ActionListener {
 		Container cp = getContentPane();
 		JPanel titlePanel = new JPanel();
 		JPanel bodyPanel = new JPanel(new GridBagLayout());
+
+		try
+		{
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Dark_Future.ttf")));
+		}
+		catch(IOException |FontFormatException e)
+		{
+			e.printStackTrace();
+		}
+
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(10,10,10,10);
 		cp.setLayout(new BorderLayout());
