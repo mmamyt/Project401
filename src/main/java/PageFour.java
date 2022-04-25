@@ -22,7 +22,7 @@ public class PageFour extends javax.swing.JFrame{
     public JTextField ID, firstName, lastName, role, startDate, endDate, salary, department, Address, email;
     static String dBID, dBFirstName, dBLastName, dBRole, dBStartDate, dBEndDate, dBDepartment, dBAddress, dBEmail;
     static double dBSalary;
-    public javax.swing.JButton buttonUpdate, buttonGenerate;
+    public javax.swing.JButton buttonUpdate, buttonGenerate, buttonBack;
     HomePageGUI hpgui;
 
     public PageFour(){
@@ -202,8 +202,20 @@ public class PageFour extends javax.swing.JFrame{
                 }
             }
         });
+        
+        buttonBack = new JButton("Back");
+        buttonBack.setBounds(10,1,100,25);
+        panel.add(buttonBack);
+        buttonBack.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		frame.dispose();
+        		new HomePageGUI();
+        	}
+        });
 
         frame.setVisible(true);
+        frame.setResizable(false);
     }
 
     public static Connection getConnection() throws SQLException {

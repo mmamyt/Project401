@@ -81,6 +81,7 @@ public class Payroll_GUI extends JFrame {
         loginPage.add(bodyPanel, BorderLayout.CENTER);
 
         loginPage.setVisible(true);
+        loginPage.setResizable(false);
     }
 
     class ActionListener1 implements ActionListener
@@ -114,7 +115,7 @@ class HomePageGUI extends JFrame{
         homePage.setLayout(new BorderLayout());
         JPanel centerPanel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(10,10,10,10);
+        c.insets = new Insets(70,10,10,10);
         homePage.setMinimumSize(new Dimension(700,450));
         homePage.setLocationByPlatform(true);
         homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -128,15 +129,16 @@ class HomePageGUI extends JFrame{
 
         c.gridx = 1;
         centerPanel.add(searchBTN);
-
+        
         c.gridx = 0;
         c.gridy = 1;
         centerPanel.add(newEmpBTN, c);
 
-        c.gridx = 2;
-        centerPanel.add(browseBTN);
-
         c.gridx = 1;
+        c.gridy = 1;
+        centerPanel.add(browseBTN, c);
+
+        c.gridx = 2;
         c.gridy = 1;
         centerPanel.add(calcSalBTN, c);
 
@@ -169,6 +171,7 @@ class HomePageGUI extends JFrame{
         homePage.add(titlePanel, BorderLayout.NORTH);
         homePage.setVisible(true);
         searchBTN.requestFocusInWindow();
+        homePage.setResizable(false);
     }
 
     class ActionListener2 implements ActionListener
