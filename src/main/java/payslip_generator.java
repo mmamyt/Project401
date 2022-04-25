@@ -69,20 +69,26 @@ public class payslip_generator extends JFrame implements ActionListener {
 		setMinimumSize(new Dimension(700,450));
 		setLocationByPlatform(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JLabel payperiodinfo = new JLabel("Input Payperiod Range");
+		JLabel payperiodfrom = new JLabel("From:");
+		JLabel payperiodto = new JLabel("To:");
 		JLabel payslipgenTitle = new JLabel("PayHero");
+		JLabel payslipgenselect = new JLabel("Select payperiod below:");
 		payslipgenTitle.setFont(new Font("Dark Future", Font.BOLD, 34));
 		titlePanel.add(payslipgenTitle);
 			c.fill = GridBagConstraints.HORIZONTAL;
-		Date1 = new JDateChooser();
 		c.gridx = 1;
 		c.gridy = 0;
-		c.gridwidth = 2;
+		bodyPanel.add(payslipgenselect,c);
+			c.fill = GridBagConstraints.HORIZONTAL;
+		Date1 = new JDateChooser();
+		c.gridx = 1;
+		c.gridy = 2;
 		c.ipady = 20;
+		c.weightx = 0.4;
+
 		bodyPanel.add(Date1, c);
-		c.weightx = 0.3;
-		c.gridx = 3;
-		c.gridy = 0;
+		c.gridx = 1;
+		c.gridy = 3;
 		c.ipady = 20;
 		addBTN = new JButton("ADD");
 		
@@ -99,8 +105,8 @@ public class payslip_generator extends JFrame implements ActionListener {
     	
 		bodyPanel.add(addBTN, c);
 		c.weightx = 0.5;
-		c.gridx = 2;
-		c.gridy = 2;
+		c.gridx = 1;
+		c.gridy = 4;
 		c.gridwidth = 2;
 		generateBTN = new JButton("Generate Payslip for all");
 		generateBTN.addActionListener(new ActionListener(){
@@ -110,20 +116,23 @@ public class payslip_generator extends JFrame implements ActionListener {
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
-
 						}
 		            	
 		            	
 		            }});
 		bodyPanel.add(generateBTN, c);
 		Date2 = new JDateChooser();
-		c.gridx = 1;
-		c.gridy = 1;
+		c.weightx = 0.5;
+		c.gridx = 2;
+		c.gridy = 2;
 		c.ipady = 20;
 		bodyPanel.add(Date2,c);
-		c.gridx = 3;
+		c.gridx = 1;
 		c.gridy = 1;
-		bodyPanel.add(payperiodinfo, c);
+		bodyPanel.add(payperiodfrom, c);
+		c.gridx = 2;
+		c.gridy = 1;
+		bodyPanel.add(payperiodto, c);
 		cp.add(titlePanel, BorderLayout.NORTH);
 		cp.add(bodyPanel, BorderLayout.CENTER);
 
