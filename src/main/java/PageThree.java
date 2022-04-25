@@ -12,7 +12,8 @@ public class PageThree extends javax.swing.JFrame {
     public JPanel panel;
     public JLabel labelID, labelFN, labelLN, labelRole, labelSDate, labelSalary, labelDepartment, labelAddress, labelEmail, msgUpdated, payHeroTitle;
     public JTextField ID, firstName, lastName, role, startDate, salary, department, Address, email, mandatory;
-    public javax.swing.JButton buttonAdd;
+    public javax.swing.JButton buttonAdd, buttonBack;
+    HomePageGUI hpgui;
 
     Connection connection = null;
 
@@ -120,11 +121,18 @@ public class PageThree extends javax.swing.JFrame {
         panel.add(msgUpdated);
 
         frame.setVisible(true);
+        frame.setResizable(false);
 
-        //button
+        //Add New Record Button
         buttonAdd = new JButton("Add New Record");
         buttonAdd.setBounds(380, 280, 150, 25);
         panel.add(buttonAdd);
+        
+        //Back Button
+        buttonBack = new JButton("Back");
+        buttonBack.setBounds(10,1,100,25);
+        panel.add(buttonBack);
+        
         buttonAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -165,6 +173,14 @@ public class PageThree extends javax.swing.JFrame {
                     msgUpdated.setText("Please fill all required fields");
                 }
             }
+        });
+        
+        buttonBack.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		frame.dispose();
+        		new HomePageGUI();
+        	}
         });
 
     }

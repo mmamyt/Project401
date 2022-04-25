@@ -36,20 +36,22 @@ class payroll_data {
 
 @SuppressWarnings("serial")
 public class payslip_generator extends JFrame implements ActionListener {
+	private JFrame frame;
 	private JButton addBTN = new JButton("ADD");
+	private JButton backBTN = new JButton("Back");
 	private JDateChooser Date1;
 	private JDateChooser Date2;
 	private JButton generateBTN = new JButton("Generate Payslip for all");
 	private payroll_data[] payslipdata;
 	private int Num_weeks;
+	HomePageGUI hpgui;
 	
 	public static void main(String[] args) {
 		new payslip_generator();
 
 	}
 	public payslip_generator(){
-	
-		Container cp = getContentPane();
+		frame = new JFrame();
 		JPanel titlePanel = new JPanel();
 		JPanel bodyPanel = new JPanel(new GridBagLayout());
 
@@ -65,10 +67,10 @@ public class payslip_generator extends JFrame implements ActionListener {
 
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(10,10,10,10);
-		cp.setLayout(new BorderLayout());
-		setMinimumSize(new Dimension(700,450));
-		setLocationByPlatform(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout());
+		frame.setMinimumSize(new Dimension(700,450));
+		frame.setLocationByPlatform(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JLabel payperiodfrom = new JLabel("From:");
 		JLabel payperiodto = new JLabel("To:");
 		JLabel payslipgenTitle = new JLabel("PayHero");
@@ -79,19 +81,19 @@ public class payslip_generator extends JFrame implements ActionListener {
 		c.gridx = 1;
 		c.gridy = 0;
 		bodyPanel.add(payslipgenselect,c);
+		
 			c.fill = GridBagConstraints.HORIZONTAL;
 		Date1 = new JDateChooser();
 		c.gridx = 1;
 		c.gridy = 2;
 		c.ipady = 20;
 		c.weightx = 0.4;
-
 		bodyPanel.add(Date1, c);
-		c.gridx = 1;
+		
+		c.gridx = 2;
 		c.gridy = 3;
 		c.ipady = 20;
 		addBTN = new JButton("ADD");
-		
 		addBTN.addActionListener(new ActionListener(){
 		            public void actionPerformed(ActionEvent e){
 		            	Date pay_period1 = Date1.getDate();
@@ -102,10 +104,10 @@ public class payslip_generator extends JFrame implements ActionListener {
 		            	Num_weeks = numweeks;
 		            	System.out.println(numweeks);
 		            }});
-    	
 		bodyPanel.add(addBTN, c);
+	
 		c.weightx = 0.5;
-		c.gridx = 1;
+		c.gridx = 2;
 		c.gridy = 4;
 		c.gridwidth = 2;
 		generateBTN = new JButton("Generate Payslip for all");
@@ -116,27 +118,39 @@ public class payslip_generator extends JFrame implements ActionListener {
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
-						}
-		            	
-		            	
+						}	
 		            }});
 		bodyPanel.add(generateBTN, c);
+		
+		backBTN.setBounds(10,1,100,25);
+		backBTN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				frame.dispose();
+				new HomePageGUI();
+			}
+		});
+		frame.add(backBTN);
+		
 		Date2 = new JDateChooser();
 		c.weightx = 0.5;
 		c.gridx = 2;
 		c.gridy = 2;
 		c.ipady = 20;
 		bodyPanel.add(Date2,c);
+		
 		c.gridx = 1;
 		c.gridy = 1;
 		bodyPanel.add(payperiodfrom, c);
+		
 		c.gridx = 2;
 		c.gridy = 1;
 		bodyPanel.add(payperiodto, c);
-		cp.add(titlePanel, BorderLayout.NORTH);
-		cp.add(bodyPanel, BorderLayout.CENTER);
+		frame.add(titlePanel, BorderLayout.NORTH);
+		frame.add(bodyPanel, BorderLayout.CENTER);
 
-		setVisible(true);
+		frame.setVisible(true);
+		frame.setResizable(false);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
