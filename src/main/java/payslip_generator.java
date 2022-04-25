@@ -72,7 +72,7 @@ public class payslip_generator extends JFrame implements ActionListener {
 		JLabel payperiodfrom = new JLabel("From:");
 		JLabel payperiodto = new JLabel("To:");
 		JLabel payslipgenTitle = new JLabel("PayHero");
-		JLabel payslipgenselect = new JLabel("Select payperiod below:");
+		JLabel payslipgenselect = new JLabel("Select Pay Period:");
 		payslipgenTitle.setFont(new Font("Dark Future", Font.BOLD, 34));
 		titlePanel.add(payslipgenTitle);
 			c.fill = GridBagConstraints.HORIZONTAL;
