@@ -2,13 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 
 public class PageThree extends javax.swing.JFrame {
 
     public JFrame frame;
-    public JPanel panel;
-    public JLabel labelID, labelFN, labelLN, labelRole, labelSDate, labelSalary, labelDepartment, labelAddress, labelEmail, msgUpdated;
+    public JPanel panel, titlePanel;
+    public JLabel labelID, labelFN, labelLN, labelRole, labelSDate, labelSalary, labelDepartment, labelAddress, labelEmail, msgUpdated, payHeroTitle;
     public JTextField ID, firstName, lastName, role, startDate, salary, department, Address, email;
     public javax.swing.JButton buttonAdd;
 
@@ -24,88 +26,104 @@ public class PageThree extends javax.swing.JFrame {
         panel.setLayout(null);
         frame.setLocationByPlatform(true);
 
+        //title
+        payHeroTitle = new JLabel("PayHero");
+        payHeroTitle.setFont(new Font("Dark Future", Font.BOLD, 34));
+        payHeroTitle.setBounds(230,30, 200, 40);
+        panel.add(payHeroTitle, BorderLayout.NORTH);
+
+        try
+        {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Dark_Future.ttf")));
+        }
+        catch(IOException |FontFormatException e)
+        {
+            e.printStackTrace();
+        }
+
         //ID
         labelID = new JLabel("ID:");
-        labelID.setBounds(20, 40, 100, 25);
+        labelID.setBounds(20, 100, 100, 25);
         panel.add(labelID);
         ID = new JTextField();
-        ID.setBounds(100, 40, 150, 25);
+        ID.setBounds(100, 100, 150, 25);
         panel.add(ID);
 
         //First Name
         labelFN = new JLabel("First Name:");
-        labelFN.setBounds(20, 70, 100, 25);
+        labelFN.setBounds(20, 130, 100, 25);
         panel.add(labelFN);
         firstName = new JTextField();
-        firstName.setBounds(100, 70, 150, 25);
+        firstName.setBounds(100, 130, 150, 25);
         panel.add(firstName);
 
         //Last Name
         labelLN = new JLabel("Last Name:");
-        labelLN.setBounds(20, 100, 100, 25);
+        labelLN.setBounds(20, 160, 100, 25);
         panel.add(labelLN);
         lastName = new JTextField();
-        lastName.setBounds(100, 100, 150, 25);
+        lastName.setBounds(100, 160, 150, 25);
         panel.add(lastName);
 
         //Address
         labelAddress = new JLabel("Address:");
-        labelAddress.setBounds(20, 130, 100, 25);
+        labelAddress.setBounds(20, 190, 100, 25);
         panel.add(labelAddress);
         Address = new JTextField();
-        Address.setBounds(100, 130, 150, 25);
+        Address.setBounds(100, 190, 150, 25);
         panel.add(Address);
 
         //Start date
         labelSDate = new JLabel("Start Date:");
-        labelSDate.setBounds(20, 160, 100, 25);
+        labelSDate.setBounds(20, 210, 100, 25);
         panel.add(labelSDate);
         startDate = new JTextField();
-        startDate.setBounds(100, 160, 150, 25);
+        startDate.setBounds(100, 210, 150, 25);
         panel.add(startDate);
 
         //Role
         labelRole = new JLabel("Role:");
-        labelRole.setBounds(300, 70, 100, 25);
+        labelRole.setBounds(300, 130, 100, 25);
         panel.add(labelRole);
         role = new JTextField();
-        role.setBounds(380, 70, 150, 25);
+        role.setBounds(380, 130, 150, 25);
         panel.add(role);
 
         //Department
         labelDepartment = new JLabel("Department:");
-        labelDepartment.setBounds(300, 100, 100, 25);
+        labelDepartment.setBounds(300, 160, 100, 25);
         panel.add(labelDepartment);
         department = new JTextField();
-        department.setBounds(380, 100, 150, 25);
+        department.setBounds(380, 160, 150, 25);
         panel.add(department);
 
         //Salary
         labelSalary = new JLabel("Salary:");
-        labelSalary.setBounds(300, 130, 100, 25);
+        labelSalary.setBounds(300, 190, 100, 25);
         panel.add(labelSalary);
         salary = new JTextField();
-        salary.setBounds(380, 130, 150, 25);
+        salary.setBounds(380, 190, 150, 25);
         panel.add(salary);
 
         //email
         labelEmail = new JLabel("email:");
-        labelEmail.setBounds(300, 160, 100, 25);
+        labelEmail.setBounds(300, 210, 100, 25);
         panel.add(labelEmail);
         email = new JTextField();
-        email.setBounds(380, 160, 150, 25);
+        email.setBounds(380, 210, 150, 25);
         panel.add(email);
 
         //success message
         msgUpdated = new JLabel(" ");
-        msgUpdated.setBounds(380,250,200,25);
+        msgUpdated.setBounds(380,310,200,25);
         panel.add(msgUpdated);
 
         frame.setVisible(true);
 
         //button
         buttonAdd = new JButton("Add New Record");
-        buttonAdd.setBounds(380, 220, 150, 25);
+        buttonAdd.setBounds(380, 280, 150, 25);
         panel.add(buttonAdd);
         buttonAdd.addActionListener(new ActionListener() {
             @Override

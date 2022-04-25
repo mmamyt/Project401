@@ -44,7 +44,7 @@ public class payslip_generator extends JFrame implements ActionListener {
 	private int Num_weeks;
 	
 	public static void main(String[] args) {
-		new payslip_generator();		
+		new payslip_generator();
 
 	}
 	public payslip_generator(){
@@ -59,8 +59,8 @@ public class payslip_generator extends JFrame implements ActionListener {
 		setLocationByPlatform(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JLabel payperiodinfo = new JLabel("Input Payperiod Range");
-		JLabel payslipgenTitle = new JLabel("Payslip Generator");
-		payslipgenTitle.setFont(new Font("Serif", Font.BOLD, 34));
+		JLabel payslipgenTitle = new JLabel("PayHero");
+		payslipgenTitle.setFont(new Font("Dark Future", Font.BOLD, 34));
 		titlePanel.add(payslipgenTitle);
 			c.fill = GridBagConstraints.HORIZONTAL;
 		Date1 = new JDateChooser();
@@ -99,6 +99,7 @@ public class payslip_generator extends JFrame implements ActionListener {
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
+
 						}
 		            	
 		            	

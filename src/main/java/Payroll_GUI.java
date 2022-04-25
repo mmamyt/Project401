@@ -222,7 +222,6 @@ class HomePageGUI extends JFrame{
     	{
     		sEIDText.setText("");
     	}
-    	
     	public void focusLost(FocusEvent evt)
     	{
     	}
