@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
+import com.toedter.calendar.JDateChooser;
 
 public class PageThree extends javax.swing.JFrame {
 
@@ -13,6 +14,7 @@ public class PageThree extends javax.swing.JFrame {
     public JLabel labelID, labelFN, labelLN, labelRole, labelSDate, labelSalary, labelDepartment, labelAddress, labelEmail, msgUpdated, payHeroTitle;
     public JTextField ID, firstName, lastName, role, startDate, salary, department, Address, email, mandatory;
     public javax.swing.JButton buttonAdd, buttonBack;
+    private JDateChooser Date1;
     HomePageGUI hpgui;
 
     Connection connection = null;
