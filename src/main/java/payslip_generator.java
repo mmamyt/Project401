@@ -158,6 +158,7 @@ public class payslip_generator extends JFrame implements ActionListener {
 	}
 	public payroll_data[] getemployeeinfo(){
 		payslip_generator connect1=new payslip_generator();
+		frame.dispose();
         payslipdata = new payroll_data[100];
 		try {
 			Connection c1 = connect1.getConnection();
