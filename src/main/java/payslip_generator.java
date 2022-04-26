@@ -31,6 +31,7 @@ class payroll_data {
     String dep;
     String email;
     String address;
+	String endDate;
     
 }
 
@@ -175,6 +176,7 @@ public class payslip_generator extends JFrame implements ActionListener {
 		         String dep = rs.getString("Department");
 		         String add = rs.getString("Address");
 		         String email = rs.getString("Email");
+			String end_date = rs.getString("EndDate");
 		         payroll_data payroll = new payroll_data();
 		         payroll.id = id;
 		         payroll.address = add;
@@ -184,6 +186,7 @@ public class payslip_generator extends JFrame implements ActionListener {
 		         payroll.sal = sal;
 		         payroll.dep = dep;
 		         payroll.email = email;
+			payroll.endDate = end_date
 		         payslipdata[i] = payroll;
 		         System.out.println( "ID = " + id);
 		         System.out.println( "First Name = " + f_name);
@@ -227,6 +230,10 @@ public class payslip_generator extends JFrame implements ActionListener {
 	void writepayslip(payroll_data[] param) throws IOException {
 		for(int i = 0; i < param.length; i++) {
 		if (param[i] != null) {
+		if (param[i].enddate != null) {
+				continue;
+			}
+		else {
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
 		System.out.println("Current relative path is: " + s);
@@ -270,6 +277,7 @@ public class payslip_generator extends JFrame implements ActionListener {
 		accwriter.println("Salary to be paid: " + param[i].sal * (Num_weeks/2) + " Gold Nuggets");
 		accwriter.println("");
 	accwriter.close();
+		}
 		}
 		else {
 			break;
