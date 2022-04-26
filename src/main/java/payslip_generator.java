@@ -186,7 +186,7 @@ public class payslip_generator extends JFrame implements ActionListener {
 		         payroll.sal = sal;
 		         payroll.dep = dep;
 		         payroll.email = email;
-			payroll.endDate = end_date
+				 payroll.endDate = end_date;
 		         payslipdata[i] = payroll;
 		         System.out.println( "ID = " + id);
 		         System.out.println( "First Name = " + f_name);
@@ -230,7 +230,7 @@ public class payslip_generator extends JFrame implements ActionListener {
 	void writepayslip(payroll_data[] param) throws IOException {
 		for(int i = 0; i < param.length; i++) {
 		if (param[i] != null) {
-		if (param[i].enddate != null) {
+		if (param[i].endDate != null) {
 				continue;
 			}
 		else {
